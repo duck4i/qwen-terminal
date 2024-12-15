@@ -4,6 +4,8 @@ A sub terminal where you tell it what you want and it executes bash commands for
 
 It works with any models but I was testing small Qwen-2.5 0.5B.
 
+![Demo](demo.gif)
+
 ## Options
 
 ```
