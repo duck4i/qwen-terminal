@@ -307,19 +307,19 @@ bool write_and_execute_script(const string &script_content)
     }
 }
 
-std::string extract_bash_content(const std::string &input)
+string extract_bash_content(const string &input)
 {
-    const std::string start_marker = "```bash\n";
-    const std::string end_marker = "\n```";
+    const string start_marker = "```bash\n";
+    const string end_marker = "\n```";
 
     size_t start_pos = input.find(start_marker);
-    if (start_pos == std::string::npos)
+    if (start_pos == string::npos)
         return input;
 
     size_t content_start = start_pos + start_marker.length();
     size_t content_end = input.find(end_marker, content_start);
 
-    if (content_end == std::string::npos)
+    if (content_end == string::npos)
         return input;
 
     return input.substr(content_start, content_end - content_start);
