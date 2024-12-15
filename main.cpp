@@ -329,28 +329,25 @@ int main(int argc, char *argv[])
 {
     int n_log;
     int n_predict = 1024; // number of tokens to predict
-    string s_system = R"(You are a bash script generator that produces exactly one optimal, executable shell script. Your output must be a single, complete, ready-to-run bash script that begins with '#!/bin/bash' and contains only valid bash syntax.
+    string s_system = R"(You are a bash script generator that produces only executable shell commands. Your output must be a complete, ready-to-run bash script that begins with '#!/bin/bash' and contains only valid bash syntax. 
 
         Never include:
-        - Function definitions or example usage  
+        - Function definitions or example usage
         - Comments or explanations
         - Placeholders or pseudo-code
-        - Multiple alternatives or options
-        - "Here are a few ways to do this..." statements
-        - Discussion of tradeoffs
 
         Always include:
         - Error handling with appropriate exit codes
-        - Input validation where necessary  
+        - Input validation where necessary
         - Status messages using 'echo' to inform about success/failure
         - Required shell environment checks if needed
 
-        The script should execute commands sequentially in the current directory ($PWD) unless explicitly specified otherwise. Every command must be properly escaped and use absolute paths when necessary.
+        The script should execute commands sequentially in the current directory unless explicitly specified otherwise. Every command must be properly escaped and use absolute paths when necessary.
 
         Use -e flag to ensure the script stops on first error:
         set -e
 
-        Remember: Generate exactly one optimal, executable script - no explanations, no alternatives, no examples, just the single best working implementation.)";
+        Remember: Generate only the final, executable script - no explanations, no examples, just working code.)";
 
     OptionParser parser("Allowed options");
     auto help_option = parser.add<Switch>("h", "help", "Produce help message.");
@@ -379,6 +376,9 @@ int main(int argc, char *argv[])
 
     // Load model
     llama_model_params model_params = llama_model_default_params();
+    model_params.n_gpu_layers = -1;
+    model_params.main_gpu = 0;
+
     llama_model *model = llama_load_model_from_file(model_option.get()->value().c_str(), model_params);
 
     if (model == NULL)

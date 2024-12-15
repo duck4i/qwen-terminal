@@ -1,17 +1,8 @@
-# Nous Hermes CLI 
+# Qwen LLM terminal 
 
-Simple unix CLI for the Hermes LLama 3 model.
+A sub terminal where you tell it what you want and it executes bash commands for you.
 
-## Usage
-
-```
-
-# Autocomplete mode
-./hermes -p "I am a duck and"
-
-# Instruct mode
-./hermes -p "Write me some cpp code." -i
-```
+It works with any models but I was testing small Qwen-2.5 0.5B.
 
 ## Options
 
@@ -29,9 +20,5 @@ Allowed options:
                                       System message for the model.
 ```
 
-## Nous Hermes Llama 3 
-https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B
-
 ## GGUFs
-* https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B-GGUF/blob/main/Hermes-3-Llama-3.2-3B.Q4_K_M.gguf
-* https://huggingface.co/NousResearch/Hermes-3-Llama-3.2-3B-GGUF/blob/main/Hermes-3-Llama-3.2-3B.Q6_K.gguf
+* https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-fp16.gguf?download=true
